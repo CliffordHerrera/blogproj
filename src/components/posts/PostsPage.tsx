@@ -16,20 +16,28 @@ export default function PostsPage() {
             dispatch(fetchPosts());
         }
 
-    }, [dispatch]);
+    }, [dispatch, posts.length]);
 
-    const postDelete = (id: number) => {
+    const postDelete: (id: number) => void = (id) => {
         dispatch(deletePost(id));
     };
 
-    const postEdit = (id: number) => {
+    const postEdit: (id: number) => void = (id) => {
         dispatch(updateBody({ id, body: text }));
     };
 
-    console.log(posts);
+    const refresh: () => Promise<void> = async () => {
+        localStorage.clear();
+        dispatch(fetchPosts());
+        console.log('refreshed!');
+    }
+
+    //console.log(posts);
+    //console.log(localStorage);
     return (
         <div className='flex flex-col justify-center'>
             <h1>PostsPage</h1>
+            <button onClick={() => refresh()} className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 right-1'>Refresh</button>
             <div className='flex flex-col items-center justify-center'>
                 {posts.map((post) => (
                     <Link to={`/posts/${post.id}`} key={post.id} >
