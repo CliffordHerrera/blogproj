@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import type { State } from '../../types';
 import { updateBody, deletePost, fetchPosts } from '../../redux/slices/postSlice';
+import PostDeals from './PostDeals';
 
 
 export default function PostsPage() {
@@ -18,13 +19,7 @@ export default function PostsPage() {
 
     }, [dispatch, posts.length]);
 
-    const postDelete: (id: number) => void = (id) => {
-        dispatch(deletePost(id));
-    };
 
-    const postEdit: (id: number) => void = (id) => {
-        dispatch(updateBody({ id, body: text }));
-    };
 
     const refresh: () => Promise<void> = async () => {
         localStorage.clear();
@@ -44,10 +39,7 @@ export default function PostsPage() {
                         <div key={post.id} className='w-3xl bg-gradient-to-br from-slate-300 to-blue-400 rounded-2xl p-4  m-4'>
                             <h2>{post.title}</h2>
                             <p>{post.body}</p>
-                            <div className='flex flex-row justify-between'>
-                                <button onClick={() => postEdit(post.id)} className='bg-yellow-500 rounded hover:bg-green-200 transition duration-300'>Edit</button>
-                                <button onClick={() => postDelete(post.id)} className='bg-red-700 border rounded hover:bg-red-200 transition duration-300'>Delete</button>
-                            </div>
+                            
                             <input
                                 type="text"
                                 placeholder='Temp for editing'
@@ -58,6 +50,7 @@ export default function PostsPage() {
                         </div>
                     </Link>
                 ))}
+                <PostDeals />
             </div>
         </div>
     )
@@ -77,3 +70,18 @@ export default function PostsPage() {
     const deletePost = (id: number) => {
         setposts(posts.filter((post) => post.id !== id))
     } */
+
+
+/**    const postDelete: (id: number) => void = (id) => {
+        dispatch(deletePost(id));
+    };
+
+    const postEdit: (id: number) => void = (id) => {
+        dispatch(updateBody({ id, body: text }));
+    };
+    
+    <div className='flex flex-row justify-between'>
+                                <button onClick={() => postEdit(post.id)} className='bg-yellow-500 rounded hover:bg-green-200 transition duration-300'>Edit</button>
+                                <button onClick={() => postDelete(post.id)} className='bg-red-700 border rounded hover:bg-red-200 transition duration-300'>Delete</button>
+                            </div>
+    */
