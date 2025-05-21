@@ -3,6 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import PostsPage from "./components/posts/PostsPage"
 import PostDetail from "./components/posts/PostDetail"
+import AddPost from "./components/posts/AddPost"
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<PostsPage />} />
         <Route path="/posts/:postId" element={<PostDetail />} />
+        <Route path='/addPost' element={<AddPost />} />
       </Routes>
 
     </div>

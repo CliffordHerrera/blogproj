@@ -20,6 +20,7 @@ export type Reactions = {
 export type State = {
     posts: {
         postData: Posts[];
+        showModal: boolean;
         status: "idle" | "loading" | "succeeded" | "failed";
     }
 }
