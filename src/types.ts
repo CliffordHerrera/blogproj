@@ -13,9 +13,6 @@ export type Comments = {
     body: string
 };
 
-export type Reactions = {
-    type: string
-};
 
 export type State = {
     posts: {

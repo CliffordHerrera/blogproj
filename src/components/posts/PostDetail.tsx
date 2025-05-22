@@ -1,3 +1,4 @@
+import '../../glitch.css';
 
 import { useParams } from 'react-router-dom';
 
@@ -6,7 +7,7 @@ export default function PostDetail() {
     //const post = posts.find((p: Posts) => p.id === Number(postId));
     return (
         <div>
-            <h1>test post </h1>
+            <h1 className='relative text-6xl font-bold text-white glitch-text'>test post </h1>
         </div>
     )
 }

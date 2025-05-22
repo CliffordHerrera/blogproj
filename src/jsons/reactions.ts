@@ -1,5 +1,5 @@
-import type { Reactions } from '../types';
-const reactions: Reactions[] =[
+//import type { Reactions } from '../types';
+/**const reactions: Reactions[] =[
   {
     type: "Like"
   },
@@ -12,4 +12,11 @@ const reactions: Reactions[] =[
   {
     type: "Fuckin Shit"
   }
-];
+];*/
+
+export enum Reactions {
+  Like = "👍",
+  LOL = "😂",
+  Dislike = "😥",
+  FuckinShit = "🤬"
+}

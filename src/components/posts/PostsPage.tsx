@@ -6,6 +6,9 @@ import { fetchPosts, setShowModal } from '../../redux/slices/postSlice';
 import PostDeals from './PostDeals';
 import AddPost from './AddPost';
 import Modal from '../Modal';
+import { Loader } from '../UI/loader';
+import '../../glitch.css';
+import ReactionsBar from '../UI/ReactionsBar';
 
 
 export default function PostsPage() {
@@ -14,6 +17,7 @@ export default function PostsPage() {
     //const [text, setText] = useState<string>('');
     const dispatch = useDispatch();
     const showModal = useSelector((state: State) => state.posts.showModal);
+    const status = useSelector((state: State) => state.posts.status);
 
     useEffect(() => {
         if (posts.length === 0) {
@@ -36,17 +40,18 @@ export default function PostsPage() {
     //console.log(localStorage);
     return (
         <div className='flex flex-col justify-center'>
-            <h1>PostsPage</h1>
+            <h1 className='relative text-6xl font-bold glitch-text' data-text="PostsPage">PostsPage</h1>
             <button
                 onClick={() => refresh()}
                 className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 right-1'>
                 Refresh
             </button>
-            <button onClick={() => setModal()}>Add Post Portal</button>
+            {status === 'loading' && <Loader />}
+            {status === 'succeeded' && <>
+            <button onClick={() => setModal()}
+                className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 left-1'>Add Post</button>
             {showModal && <Modal><AddPost /></Modal>}
-            <Link to='/addPost' className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 left-1'>
-                Add Post
-            </Link>
+            
             <div className='flex flex-col items-center justify-center'>
                 {posts.map((post) => (
 
@@ -56,12 +61,15 @@ export default function PostsPage() {
                             <p>{post.body}</p>
                         </Link>
                         <PostDeals id={post.id} text={post.body} />
-
+                        <ReactionsBar />
                     </div>
-
                 ))}
-
             </div>
+            </>
+            
+            }
+            
+            {status === 'failed' && <div>Failed to load</div>}
         </div>
     )
 };
