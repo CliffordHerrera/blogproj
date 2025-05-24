@@ -13,7 +13,7 @@ export default function AddPost() {
 
 
     const postAdd = () => {
-        dispatch(addPost({ userId: 1, id: posts.length + 1, title: 'title', body: 'body' }));
+        dispatch(addPost({ userId: 1, id: posts.length + 1, title: title, body: body }));
         dispatch(setShowModal(false));
     };
 

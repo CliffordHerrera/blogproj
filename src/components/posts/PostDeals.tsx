@@ -6,7 +6,6 @@ import Modal from '../Modal';
 
 type PostDealsProps = {
     id: number;
-    text: string;
 };
 
 export default function PostDeals({ id }: PostDealsProps) {
