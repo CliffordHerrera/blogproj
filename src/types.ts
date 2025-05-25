@@ -19,7 +19,12 @@ export type State = {
         postData: Posts[];
         showModal: boolean;
         status: "idle" | "loading" | "succeeded" | "failed";
-    }
+    },
+    comments: {
+        commentData: Comments[];
+        showModal: boolean;
+        status: "idle" | "loading" | "succeeded" | "failed";
+    },
 }
 
 //export type RootState = ReturnType<typeof store.getState>;

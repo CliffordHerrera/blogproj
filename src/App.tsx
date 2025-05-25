@@ -4,6 +4,7 @@ import './App.css'
 import PostsPage from "./components/posts/PostsPage"
 import PostDetail from "./components/posts/PostDetail"
 import AddPost from "./components/posts/AddPost"
+import Coments from "./components/comments/comments"
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/" element={<PostsPage />} />
         <Route path="/posts/:postId" element={<PostDetail />} />
         <Route path='/addPost' element={<AddPost />} />
+        <Route path='/comments' element={<Coments />} />
       </Routes>
 
     </div>
