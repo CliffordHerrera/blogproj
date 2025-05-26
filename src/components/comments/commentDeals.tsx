@@ -1,48 +1,45 @@
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateBody, deletePost } from '../../redux/slices/postSlice';
-import type { State } from '../../types';
-import Modal from '../Modal';
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import Modal from "../Modal";
+import { addComment, deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
+import type { State } from "../../types";
 
-
-export default function PostDeals({ id }: { id: number }) {
+export default function CommentDeals({ commentId }: { commentId: number }) {
     const dispatch = useDispatch();
-    const posts = useSelector((state: State) => state.posts.postData);
     const [showDel, setShowDel] = useState<boolean>(false);
     const [showEdit, setShowEdit] = useState<boolean>(false);
-    const [title, setTitle] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const [body, setBody] = useState<string>('');
 
-    const postDelete = () => {
-        dispatch(deletePost(id));
-    };
-
-    const postEdit = () => {
-        dispatch(updateBody({ id, title: title, body: body }));
+    const cumEdit = () => {
+        dispatch(updateBodyCum({ id: commentId, name: name, body: body }));
         setShowEdit(false);
-    };
+    }
 
-
+    const cumDelete = () => {
+        dispatch(deleteComment(commentId));
+        setShowDel(false);
+    }
 
     return (
-        <div className="flex flex-row justify-between mt-2">
+        <div>
             <button
                 onClick={() => setShowEdit(true)}
                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
             >
-                Edit Post
+                Edit Comment
             </button>
 
             {showEdit && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
-                        <h1>Edit Post</h1>
-                        <label htmlFor="title">Title</label>
+                        <h1>Edit Comment</h1>
+                        <label htmlFor="title">Name</label>
                         <input
                             type="text"
-                            name="title"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            name="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="border black rounded m-2"
                         />
                         <label htmlFor="body">Text</label>
@@ -64,7 +61,7 @@ export default function PostDeals({ id }: { id: number }) {
                                 Cancel
                             </button>
                             <button
-                                onClick={postEdit}
+                                onClick={cumEdit}
                                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300"
                             >
                                 Save
@@ -74,12 +71,12 @@ export default function PostDeals({ id }: { id: number }) {
                 </Modal>
             )}
             <button onClick={() => setShowDel(true)} className='bg-red-700 border rounded hover:bg-red-200 transition duration-300'>
-                Delete Post
+                Delete Comment
             </button>
             {showDel && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
-                        <h1>Are you sure you wanna delete this post?</h1>
+                        <h1>Are you sure you wanna delete this comment?</h1>
                         <button
                             onClick={() => setShowDel(false)}
                             className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"
@@ -87,7 +84,7 @@ export default function PostDeals({ id }: { id: number }) {
                             Cancel
                         </button>
                         <button
-                            onClick={postDelete}
+                            onClick={cumDelete}
                             className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"
                         >
                             Delete
@@ -95,10 +92,47 @@ export default function PostDeals({ id }: { id: number }) {
                     </div>
                 </Modal>
             )}
-            
+
+        </div>
+    )
+}
+
+export const AddComment = () => {
+    const comments = useSelector((state: State) => state.comments.commentData);
+    const dispatch = useDispatch();
+    const [name, setName] = useState<string>('');
+    const [body, setBody] = useState<string>('');
+    //const showModal = useSelector((state: State) => state.posts.showModal);
+
+
+
+    const cumAdd = () => {
+        dispatch(addComment({ postId: 1, id: comments.length + 1, name: name, body: body }));
+        dispatch(setShowModal(false));
+    };
+
+    return (
+        <div className="flex flex-col justify-between mt-2">
+            <h1>Add Some Post</h1>
+            <label htmlFor="title">Title</label>
+            <input
+                type="text"
+                name='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className='border black rounded m-2'
+            />
+            <label htmlFor="body">Text</label>
+            <textarea name="body" id="body" cols={30} rows={10} value={body} onChange={(e) => setBody(e.target.value)}
+                className='border black rounded m-2'>
+                Enter some text
+            </textarea>
+            <button
+                onClick={cumAdd}
+                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
+            >
+                Add Comment
+            </button>
         </div>
     );
 }
-
-
-/**   */

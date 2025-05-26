@@ -25,11 +25,19 @@ const commentSlice = createSlice({
     reducers: {
         deleteComment: (state, action: PayloadAction<number>) => {
             state.commentData = state.commentData.filter((p) => p.id !== action.payload);
-            localStorage.setItem("posts", JSON.stringify(state.commentData));
+            localStorage.setItem("comments", JSON.stringify(state.commentData));
         },
         addComment: (state, action: PayloadAction<Comments>) => {
             state.commentData.push(action.payload);
-            localStorage.setItem("posts", JSON.stringify(state.commentData));
+            localStorage.setItem("comments", JSON.stringify(state.commentData));
+        },
+        updateBodyCum: (state, action: PayloadAction<{ id: number; name: string; body: string }>) => {
+            const comment = state.commentData.find((p) => p.id === action.payload.id);
+            if (comment) {
+                comment.body = action.payload.body;
+                comment.name = action.payload.name;
+            };
+            localStorage.setItem("comments", JSON.stringify(state.commentData));
         },
         setShowModal: (state, action: PayloadAction<boolean>) => {
             state.showModal = action.payload
@@ -41,7 +49,7 @@ const commentSlice = createSlice({
         });
         builder.addCase(fetchComments.fulfilled, (state, action: PayloadAction<Comments[]>) => {
             state.status = "succeeded";
-            const local = localStorage.getItem("posts");
+            const local = localStorage.getItem("comments");
             state.commentData = local ? JSON.parse(local) : action.payload;
         });
         builder.addCase(fetchComments.rejected, (state) => {
@@ -52,7 +60,7 @@ const commentSlice = createSlice({
 
 
 
-export const {  deleteComment, addComment, setShowModal } = commentSlice.actions
+export const {  deleteComment, addComment, updateBodyCum, setShowModal } = commentSlice.actions
 export default commentSlice.reducer;
 
 /**updateBody: (state, action: PayloadAction<{ id: number; title: string; body: string }>) => {

@@ -1,15 +1,30 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
 import type { State, Comments } from "../../types";
+import { fetchComments } from "../../redux/slices/commentSlice";
+import CommentDeals from "./commentDeals";
 
-export default function Coments () {
+export default function Coments ({postId}: {postId: number}) {
     const comments = useSelector((state: State) => state.comments.commentData);
+    const dispatch = useDispatch();
+
+        useEffect(() => {
+            if (comments.length === 0) {
+                dispatch(fetchComments());
+            }
+    
+        }, [dispatch, comments.length]);
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center bg-pink-500 border-black rounded-2xl m-2">
+            <h1 className="text-xl text-green-500 font-bold">Comments</h1>
+
             {comments.map((comment: Comments) => (
-                <div key={comment.id}>
-                    <h3>{comment.name}</h3>
+                comment.postId === postId &&
+                <div key={comment.id} className="flex flex-col items-center justify-center bg-blue-400 m-2 p-2 rounded">
+                    <h3 className="text-lg text-red-700 font-semibold">{comment.name}</h3>
                     <p>{comment.body}</p>
+                    <CommentDeals commentId={comment.id} />
                 </div>
             ))}
         </div>

@@ -11,7 +11,7 @@ export default function App() {
   // const [count, setCount] = useState(0)
 
   return (
-    <div className="flex flex-col items-center-safe justify-center">
+    <div className="flex flex-col items-center-safe justify-center w-full">
       <Routes>
         <Route path="/" element={<PostsPage />} />
         <Route path="/posts/:postId" element={<PostDetail />} />

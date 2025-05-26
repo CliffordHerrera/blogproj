@@ -9,6 +9,7 @@ import Modal from '../Modal';
 import { Loader } from '../UI/loader';
 import '../../glitch.css';
 import ReactionsBar from '../UI/ReactionsBar';
+import Coments from '../comments/comments';
 
 
 export default function PostsPage() {
@@ -39,7 +40,7 @@ export default function PostsPage() {
     //console.log(posts);
     //console.log(localStorage);
     return (
-        <div className='flex flex-col justify-center'>
+        <div className='flex flex-col justify-center max-w-screen'>
             <h1 className='relative text-6xl font-bold glitch-text' data-text="PostsPage">PostsPage</h1>
             <button
                 onClick={() => refresh()}
@@ -55,13 +56,14 @@ export default function PostsPage() {
             <div className='flex flex-col items-center justify-center'>
                 {posts.map((post) => (
 
-                    <div key={post.id} className='w-3xl bg-gradient-to-br from-slate-300 to-blue-400 rounded-2xl p-4  m-4'>
+                    <div key={post.id} className='w-6xl bg-gradient-to-br from-slate-300 to-blue-400 rounded-2xl p-4  m-4'>
                         <Link to={`/posts/${post.id}`} key={post.id} >
                             <h2>{post.title}</h2>
                             <p>{post.body}</p>
                         </Link>
-                        <PostDeals id={post.id} text={post.body} />
+                        <PostDeals id={post.id} />
                         <ReactionsBar />
+                        <Coments postId={post.id} />
                     </div>
                 ))}
             </div>
