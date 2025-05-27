@@ -1,19 +1,24 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import type { State, Comments } from "../../types";
 import { fetchComments } from "../../redux/slices/commentSlice";
 import CommentDeals from "./commentDeals";
+import AddComment from "./addComment";
+import Modal from "../Modal";
+import { setShowModal } from "../../redux/slices/commentSlice";
 
-export default function Coments ({postId}: {postId: number}) {
+export default function Coments({ postId }: { postId: number }) {
     const comments = useSelector((state: State) => state.comments.commentData);
     const dispatch = useDispatch();
+    const showAdd = useSelector((state: State) => state.comments.showModal);
 
-        useEffect(() => {
-            if (comments.length === 0) {
-                dispatch(fetchComments());
-            }
-    
-        }, [dispatch, comments.length]);
+
+    useEffect(() => {
+        if (comments.length === 0) {
+            dispatch(fetchComments());
+        }
+
+    }, [dispatch, comments.length]);
 
     return (
         <div className="flex flex-col items-center justify-center bg-pink-500 border-black rounded-2xl m-2">
@@ -27,6 +32,16 @@ export default function Coments ({postId}: {postId: number}) {
                     <CommentDeals commentId={comment.id} />
                 </div>
             ))}
+            <button
+                onClick={() => dispatch(setShowModal(true))}
+                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2">
+                Add Comment
+            </button>
+            {showAdd && 
+            <Modal>
+                <AddComment postId={postId}/>
+            </Modal>}
+            
         </div>
     )
 }

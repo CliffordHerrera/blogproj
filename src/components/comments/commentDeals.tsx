@@ -1,7 +1,7 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Modal from "../Modal";
-import { addComment, deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
+import { deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
 import type { State } from "../../types";
 
 export default function CommentDeals({ commentId }: { commentId: number }) {
@@ -97,42 +97,3 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
     )
 }
 
-export const AddComment = () => {
-    const comments = useSelector((state: State) => state.comments.commentData);
-    const dispatch = useDispatch();
-    const [name, setName] = useState<string>('');
-    const [body, setBody] = useState<string>('');
-    //const showModal = useSelector((state: State) => state.posts.showModal);
-
-
-
-    const cumAdd = () => {
-        dispatch(addComment({ postId: 1, id: comments.length + 1, name: name, body: body }));
-        dispatch(setShowModal(false));
-    };
-
-    return (
-        <div className="flex flex-col justify-between mt-2">
-            <h1>Add Some Post</h1>
-            <label htmlFor="title">Title</label>
-            <input
-                type="text"
-                name='name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className='border black rounded m-2'
-            />
-            <label htmlFor="body">Text</label>
-            <textarea name="body" id="body" cols={30} rows={10} value={body} onChange={(e) => setBody(e.target.value)}
-                className='border black rounded m-2'>
-                Enter some text
-            </textarea>
-            <button
-                onClick={cumAdd}
-                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
-            >
-                Add Comment
-            </button>
-        </div>
-    );
-}
