@@ -10,13 +10,13 @@ export default function AddComment ({ postId }: { postId: number }) {
     const [name, setName] = useState<string>('');
     const [body, setBody] = useState<string>('');
     const [email, setMail] = useState<string>('');
-    const showModal = useSelector((state: State) => state.comments.showModal);
+    const showAdd = useSelector((state: State) => state.comments.showModal);
 
 
 
     const cumAdd = () => {
         dispatch(addComment({ postId: postId, id: comments.length + 1, name: name, body: body, email: email }));
-        dispatch(setShowModal(false));
+        dispatch(setShowModal(null));
     };
 
     return (

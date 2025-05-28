@@ -33,7 +33,7 @@ export default function Coments({ postId }: { postId: number }) {
                 </div>
             ))}
             <button
-                onClick={() => dispatch(setShowModal(true))}
+                onClick={() => dispatch(setShowModal(postId))}
                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2">
                 Add Comment
             </button>

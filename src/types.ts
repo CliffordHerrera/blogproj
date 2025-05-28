@@ -22,7 +22,7 @@ export type State = {
     },
     comments: {
         commentData: Comments[];
-        showModal: boolean;
+        showModal: number | null;
         status: "idle" | "loading" | "succeeded" | "failed";
     },
 }

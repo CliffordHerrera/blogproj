@@ -3,13 +3,13 @@ import type { Comments } from "../../types";
 
 type CommentState = {
     commentData: Comments[];
-    showModal: boolean;
+    showModal: number | null;
     status: "idle" | "loading" | "succeeded" | "failed";
 }
 
 const initialState: CommentState = {
     commentData: [],
-    showModal: false,
+    showModal: null,
     status: "idle",
 }
 
@@ -39,7 +39,7 @@ const commentSlice = createSlice({
             };
             localStorage.setItem("comments", JSON.stringify(state.commentData));
         },
-        setShowModal: (state, action: PayloadAction<boolean>) => {
+        setShowModal: (state, action: PayloadAction<number | null>) => {
             state.showModal = action.payload
         }
     },
