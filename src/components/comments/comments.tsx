@@ -37,7 +37,7 @@ export default function Coments({ postId }: { postId: number }) {
                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2">
                 Add Comment
             </button>
-            {showAdd && 
+            {showAdd === postId && 
             <Modal>
                 <AddComment postId={postId}/>
             </Modal>}

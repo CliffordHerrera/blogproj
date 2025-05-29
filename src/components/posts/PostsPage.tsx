@@ -41,7 +41,7 @@ export default function PostsPage() {
     //console.log(localStorage);
     return (
         <div className='flex flex-col justify-center max-w-screen'>
-            <h1 className='relative text-6xl font-bold glitch-text' data-text="PostsPage">PostsPage</h1>
+            <h1 className='relative text-6xl font-bold mt-10'>PostsPage</h1>
             <button
                 onClick={() => refresh()}
                 className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 right-1'>
@@ -50,7 +50,7 @@ export default function PostsPage() {
             {status === 'loading' && <Loader />}
             {status === 'succeeded' && <>
             <button onClick={() => setModal()}
-                className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-1 left-1'>Add Post</button>
+                className='bg-blue-300 hover:bg-blue-500 border-black rounded m-3 fixed top-20 left-1'>Add Post</button>
             {showModal && <Modal><AddPost /></Modal>}
             
             <div className='flex flex-col items-center justify-center'>
