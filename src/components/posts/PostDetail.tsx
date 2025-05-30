@@ -1,4 +1,3 @@
-import '../../glitch.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { State } from '../../types';
@@ -11,11 +10,11 @@ export default function PostDetail() {
     const posts = useSelector((state: State) => state.posts.postData);
     const navigate = useNavigate();
     return (
-        <div className='bg-gradient-to-br from-blue-500 to-purple-700 w-full h-screen'>
-            <h1 className='relative text-6xl font-bold text-white glitch-text' data-text='test post'>test post </h1>
+        <div className='bg-gradient-to-br from-blue-500 to-purple-700 w-full h-screen mt-20 rounded-2xl'>
+            <h1 className='relative text-6xl font-bold text-white'>test post </h1>
             <button 
             onClick={() => navigate(-1)} 
-            className='bg-blue-500 rounded hover:bg-blue-300 transition duration-300 fixed top-4 left-4'>
+            className='bg-blue-500 rounded hover:bg-blue-300 transition duration-300 fixed top-20 left-4'>
                 Back
                 </button>
             {posts.map((p) => p.id === Number(postId) && 
@@ -23,7 +22,7 @@ export default function PostDetail() {
                 <h1 key={p.id}>{p.title}</h1>
                 <p>{p.body}</p>
                 <PostDeals id={p.id} />
-                <ReactionsBar />
+                <ReactionsBar postId={p.id}/>
             </div>
             
 
@@ -31,6 +30,3 @@ export default function PostDetail() {
         </div>
     )
 }
-
-/**<h1>Post detail {postId}</h1>
-            <p>{post?.body}</p> */
