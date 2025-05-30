@@ -1,3 +1,5 @@
+import type {  ReactionState } from "./redux/slices/reactionSlice";
+
 export type Posts = {
     userId: number,
     id: number,
@@ -25,6 +27,8 @@ export type State = {
         showModal: number | null;
         status: "idle" | "loading" | "succeeded" | "failed";
     },
+    reactions: ReactionState;
 }
-
-//export type RootState = ReturnType<typeof store.getState>;
+    
+    
+    //export type RootState = ReturnType<typeof store.getState>;

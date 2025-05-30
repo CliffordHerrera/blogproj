@@ -62,7 +62,7 @@ export default function PostsPage() {
                             <p>{post.body}</p>
                         </Link>
                         <PostDeals id={post.id} />
-                        <ReactionsBar />
+                        <ReactionsBar postId={post.id}  />
                         <Coments postId={post.id} />
                     </div>
                 ))}
