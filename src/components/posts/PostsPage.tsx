@@ -65,7 +65,7 @@ export default function PostsPage() {
                         <ReactionsBar postId={post.id}  />
                         <Coments postId={post.id} />
                     </div>
-                ))}
+                )).reverse()}
             </div>
             </>
             
