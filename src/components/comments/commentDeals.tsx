@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Modal from "../Modal";
 import { deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
 import type { State } from "../../types";
@@ -10,6 +10,7 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
     const [showEdit, setShowEdit] = useState<boolean>(false);
     const [name, setName] = useState<string>('');
     const [body, setBody] = useState<string>('');
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const cumEdit = () => {
         dispatch(updateBodyCum({ id: commentId, name: name, body: body }));
@@ -20,6 +21,16 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
         dispatch(deleteComment(commentId));
         setShowDel(false);
     }
+
+    useEffect(() => {
+        if (showEdit) {
+            const timer = setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showEdit]);
 
     return (
         <div>
@@ -39,6 +50,7 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
                             type="text"
                             name="name"
                             value={name}
+                            ref={inputRef}
                             onChange={(e) => setName(e.target.value)}
                             className="border black rounded m-2"
                         />

@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import type { State } from "../../types";
 import { addComment, setShowModal } from "../../redux/slices/commentSlice";
 
 
-export default function AddComment ({ postId }: { postId: number }) {
+export default function AddComment({ postId }: { postId: number }) {
     const comments = useSelector((state: State) => state.comments.commentData);
     const dispatch = useDispatch();
     const [name, setName] = useState<string>('');
     const [body, setBody] = useState<string>('');
     const [email, setMail] = useState<string>('');
-    const [error, setError] = useState<{name?: string; email?: string; body?: string}>({});
-    const showAdd = useSelector((state: State) => state.comments.showModal);
+    const [error, setError] = useState<{ name?: string; email?: string; body?: string }>({});
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const validate = () => {
         const newError: typeof error = {};
@@ -35,15 +35,28 @@ export default function AddComment ({ postId }: { postId: number }) {
         setMail('');
     };
 
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
+
+
     return (
         <div className="flex flex-col justify-between mt-2">
             <h1>Add Some Comment</h1>
-            <button onClick={() => dispatch(setShowModal(null))} className="absolute top-2 right-2 hover:scale-125">❌</button>
+            <button
+                onClick={() => dispatch(setShowModal(null))}
+                onKeyDown={(e) => {
+                    if (e.key === 'Esc' || e.key === ' ') {
+                        dispatch(setShowModal(null));
+                    }
+                }}
+                className="absolute top-2 right-2 hover:scale-125">❌</button>
             <label htmlFor="title">Title</label>
             <input
                 type="text"
                 name='name'
                 value={name}
+                ref={inputRef}
                 onChange={(e) => setName(e.target.value)}
                 className='border black rounded m-2'
                 required

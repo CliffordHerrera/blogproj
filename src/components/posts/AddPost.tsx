@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, setShowModal } from '../../redux/slices/postSlice';
 import type { State } from '../../types';
@@ -9,6 +9,7 @@ export default function AddPost() {
     const [title, setTitle] = useState<string>('');
     const [body, setBody] = useState<string>('');
     const [error, setError] = useState<{ title?: string; body?: string }>({});
+    const inputRef = useRef<HTMLInputElement>(null);
     const validate = () => {
         const newError: typeof error = {};
 
@@ -29,6 +30,12 @@ export default function AddPost() {
         setTitle('');
     };
 
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
+
+
+
     return (
         <div className="flex flex-col justify-between mt-2">
             <h1>Add Some Post</h1>
@@ -38,6 +45,7 @@ export default function AddPost() {
                 type="text"
                 name='title'
                 value={title}
+                ref={inputRef}
                 onChange={(e) => setTitle(e.target.value)}
                 className='border black rounded m-2'
                 required

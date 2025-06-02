@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateBody, deletePost } from '../../redux/slices/postSlice';
 import type { State } from '../../types';
@@ -12,6 +12,7 @@ export default function PostDeals({ id }: { id: number }) {
     const [showEdit, setShowEdit] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
     const [body, setBody] = useState<string>('');
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const postDelete = () => {
         dispatch(deletePost(id));
@@ -22,6 +23,15 @@ export default function PostDeals({ id }: { id: number }) {
         setShowEdit(false);
     };
 
+    useEffect(() => {
+        if (showEdit) {
+            const timer = setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100);
+
+            return () => clearTimeout(timer);
+        }
+    }, [showEdit]);
 
 
     return (
@@ -42,6 +52,7 @@ export default function PostDeals({ id }: { id: number }) {
                             type="text"
                             name="title"
                             value={title}
+                            ref={inputRef}
                             onChange={(e) => setTitle(e.target.value)}
                             className="border black rounded m-2"
                         />
@@ -95,7 +106,7 @@ export default function PostDeals({ id }: { id: number }) {
                     </div>
                 </Modal>
             )}
-            
+
         </div>
     );
 }
