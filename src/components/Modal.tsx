@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import { type ReactNode } from "react";
-import { useDispatch } from "react-redux";
-import { setShowModal } from "../redux/slices/postSlice";
+//import { useDispatch } from "react-redux";
+//import { setShowModal } from "../redux/slices/postSlice";
 
 const Modal = ({ children }: { children: ReactNode }) => {
   const element = document.getElementById("modal-root");

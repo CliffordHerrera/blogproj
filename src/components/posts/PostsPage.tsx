@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import  { useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import type { AppDispatch} from '../../redux/store';
 import type { State } from '../../types';
 import { fetchPosts, setShowModal } from '../../redux/slices/postSlice';
 import PostDeals from './PostDeals';
@@ -12,11 +13,12 @@ import ReactionsBar from '../UI/ReactionsBar';
 import Coments from '../comments/comments';
 
 
+
 export default function PostsPage() {
     //const [posts, setPosts] = useState<Posts[]>(posts);
     const posts = useSelector((state: State) => state.posts.postData);
     //const [text, setText] = useState<string>('');
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const showModal = useSelector((state: State) => state.posts.showModal);
     const status = useSelector((state: State) => state.posts.status);
 

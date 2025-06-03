@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { updateBody, deletePost } from '../../redux/slices/postSlice';
-import type { State } from '../../types';
+//import type { State } from '../../types';
 import Modal from '../Modal';
 
 
 export default function PostDeals({ id }: { id: number }) {
     const dispatch = useDispatch();
-    const posts = useSelector((state: State) => state.posts.postData);
+    //const posts = useSelector((state: State) => state.posts.postData);
     const [showDel, setShowDel] = useState<boolean>(false);
     const [showEdit, setShowEdit] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');

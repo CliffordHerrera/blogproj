@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import Modal from "../Modal";
 import { deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
-import type { State } from "../../types";
 
 export default function CommentDeals({ commentId }: { commentId: number }) {
     const dispatch = useDispatch();

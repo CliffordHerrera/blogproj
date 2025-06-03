@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {Routes, Route} from 'react-router-dom'
 import './App.css'
 import PostsPage from "./components/posts/PostsPage"
@@ -18,7 +17,7 @@ export default function App() {
         <Route path="/" element={<PostsPage />} />
         <Route path="/posts/:postId" element={<PostDetail />} />
         <Route path='/addPost' element={<AddPost />} />
-        <Route path='/comments' element={<Coments />} />
+        <Route path='/comments' element={<Coments postId={0}/>} />
       </Routes>
 
     </div>

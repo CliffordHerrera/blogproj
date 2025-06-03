@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
+import type { AppDispatch} from '../../redux/store';
 import type { State, Comments } from "../../types";
 import { fetchComments } from "../../redux/slices/commentSlice";
 import CommentDeals from "./commentDeals";
@@ -9,7 +10,7 @@ import { setShowModal } from "../../redux/slices/commentSlice";
 
 export default function Coments({ postId }: { postId: number }) {
     const comments = useSelector((state: State) => state.comments.commentData);
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const showAdd = useSelector((state: State) => state.comments.showModal);
 
 
