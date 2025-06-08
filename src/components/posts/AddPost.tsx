@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, setShowModal } from '../../redux/slices/postSlice';
-import type { State } from '../../types';
+import type { State } from '../../types/types';
 
 export default function AddPost() {
     const posts = useSelector((state: State) => state.posts.postData);
@@ -47,13 +47,13 @@ export default function AddPost() {
                 value={title}
                 ref={inputRef}
                 onChange={(e) => setTitle(e.target.value)}
-                className='border black rounded m-2'
+                className='border black rounded m-2 p-2'
                 required
             />
             {error.title && <p className='text-red-500'>{error.title}</p>}
             <label htmlFor="body">Text</label>
             <textarea name="body" id="body" cols={30} rows={10} value={body} onChange={(e) => setBody(e.target.value)}
-                className='border black rounded m-2' required>
+                className='border black rounded m-2 p-2' required>
                 Enter some text
             </textarea>
             {error.body && <p className='text-red-500'>{error.body}</p>}

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import type { State } from "../../types";
+import type { State } from "../../types/types";
 import { addComment, setShowModal } from "../../redux/slices/commentSlice";
 
 

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
-import type { Posts } from "../../types";
+import type { Posts } from "../../types/types";
 
 type PostsState = {
     postData: Posts[];

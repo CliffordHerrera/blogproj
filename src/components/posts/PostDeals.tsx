@@ -1,18 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import { updateBody, deletePost } from '../../redux/slices/postSlice';
-//import type { State } from '../../types';
+import type { State } from '../../types/types';
 import Modal from '../Modal';
-
+import CommentIcon from '@mui/icons-material/Comment';
+import LikeIcon from '@mui/icons-material/Favorite';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 export default function PostDeals({ id }: { id: number }) {
     const dispatch = useDispatch();
-    //const posts = useSelector((state: State) => state.posts.postData);
     const [showDel, setShowDel] = useState<boolean>(false);
     const [showEdit, setShowEdit] = useState<boolean>(false);
     const [title, setTitle] = useState<string>('');
     const [body, setBody] = useState<string>('');
     const inputRef = useRef<HTMLInputElement>(null);
+    const comments = useSelector((state: State) => state.comments.commentData);
 
     const postDelete = () => {
         dispatch(deletePost(id));
@@ -35,13 +38,12 @@ export default function PostDeals({ id }: { id: number }) {
 
 
     return (
-        <div className="flex flex-row justify-between mt-2">
-            <button
+        <div className="flex flex-row justify-evenly mt-2">
+            <div
                 onClick={() => setShowEdit(true)}
-                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
             >
-                Edit Post
-            </button>
+                <EditIcon />
+            </div>
 
             {showEdit && (
                 <Modal>
@@ -84,9 +86,9 @@ export default function PostDeals({ id }: { id: number }) {
                     </div>
                 </Modal>
             )}
-            <button onClick={() => setShowDel(true)} className='bg-red-700 border rounded hover:bg-red-200 transition duration-300'>
-                Delete Post
-            </button>
+            <div onClick={() => setShowDel(true)}>
+                <DeleteIcon />
+            </div>
             {showDel && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
@@ -110,6 +112,3 @@ export default function PostDeals({ id }: { id: number }) {
         </div>
     );
 }
-
-
-/**   */

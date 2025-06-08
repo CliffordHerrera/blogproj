@@ -1,4 +1,4 @@
-import type {  ReactionState } from "./redux/slices/reactionSlice";
+import type {  ReactionState } from "../redux/slices/reactionSlice";
 
 export type Posts = {
     userId: number,
@@ -29,6 +29,3 @@ export type State = {
     },
     reactions: ReactionState;
 }
-    
-    
-    //export type RootState = ReturnType<typeof store.getState>;

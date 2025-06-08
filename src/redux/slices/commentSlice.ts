@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit";
-import type { Comments } from "../../types";
+import type { Comments } from "../../types/types";
 
 type CommentState = {
     commentData: Comments[];
@@ -62,12 +62,3 @@ const commentSlice = createSlice({
 
 export const {  deleteComment, addComment, updateBodyCum, setShowModal } = commentSlice.actions
 export default commentSlice.reducer;
-
-/**updateBody: (state, action: PayloadAction<{ id: number; title: string; body: string }>) => {
-            const post = state.commentData.find((p) => p.id === action.payload.id);
-            if (post) {
-                post.body = action.payload.body;
-                post.title = action.payload.title;
-            };
-            localStorage.setItem("posts", JSON.stringify(state.commentData));
-        }, */

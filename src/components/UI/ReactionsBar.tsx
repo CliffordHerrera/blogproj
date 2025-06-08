@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
-import type { State } from '../../types';
-import { Reactions } from '../../jsons/reactions';
+import type { State } from '../../types/types';
+import { Reactions } from '../../types/reactions';
 import { setReaction } from '../../redux/slices/reactionSlice';
 
 

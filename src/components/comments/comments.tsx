@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch} from '../../redux/store';
-import type { State, Comments } from "../../types";
+import type { State, Comments } from "../../types/types";
 import { fetchComments } from "../../redux/slices/commentSlice";
 import CommentDeals from "./commentDeals";
 import AddComment from "./addComment";

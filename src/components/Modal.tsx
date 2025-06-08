@@ -1,11 +1,8 @@
 import ReactDOM from "react-dom";
 import { type ReactNode } from "react";
-//import { useDispatch } from "react-redux";
-//import { setShowModal } from "../redux/slices/postSlice";
 
 const Modal = ({ children }: { children: ReactNode }) => {
   const element = document.getElementById("modal-root");
-  //const dispatch = useDispatch();
   if (!element) return null;
 
   return ReactDOM.createPortal(
@@ -19,4 +16,3 @@ const Modal = ({ children }: { children: ReactNode }) => {
 
 export default Modal;
 
-//onClick={() => dispatch(setShowModal(false))}
