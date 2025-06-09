@@ -1,8 +1,6 @@
-import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import type { AppDispatch} from '../../redux/store';
 import type { State, Comments } from "../../types/types";
-import { fetchComments } from "../../redux/slices/commentSlice";
 import CommentDeals from "./commentDeals";
 import AddComment from "./addComment";
 import Modal from "../Modal";
@@ -12,14 +10,6 @@ export default function Coments({ postId }: { postId: number }) {
     const comments = useSelector((state: State) => state.comments.commentData);
     const dispatch = useDispatch<AppDispatch>();
     const showAdd = useSelector((state: State) => state.comments.showModal);
-
-
-    useEffect(() => {
-        if (comments.length === 0) {
-            dispatch(fetchComments());
-        }
-
-    }, [dispatch, comments.length]);
 
     return (
         <div className="flex flex-col items-center justify-center bg-pink-500 border-black rounded-2xl m-2">
@@ -46,3 +36,13 @@ export default function Coments({ postId }: { postId: number }) {
         </div>
     )
 }
+
+
+/**
+ *     useEffect(() => {
+        if (comments.length === 0) {
+            dispatch(fetchComments());
+        }
+
+    }, [dispatch, comments.length]);
+ */

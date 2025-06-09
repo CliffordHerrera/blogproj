@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-//import { Reactions } from "../../jsons/reactions";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 type ReactionKey = 'Like' | 'LOL' | 'Dislike' | 'FuckinShit';

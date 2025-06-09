@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { State } from '../../types/types';
-import PostDeals from './PostDeals';
-import ReactionsBar from '../UI/ReactionsBar';
-import Coments from '../comments/comments';
-import Modal from '../Modal';
-import AddPost from './AddPost';
+import type { State } from '../types/types';
+import PostDeals from '../components/posts/PostDeals';
+import ReactionsBar from '../components/UI/ReactionsBar';
+import Coments from '../components/comments/comments';
+import Modal from '../components/Modal';
+import AddPost from '../components/posts/AddPost';
 
 export default function PostDetail() {
     const { postId } = useParams<{postId: string}>();
@@ -25,7 +25,7 @@ export default function PostDetail() {
             <div>
                 <h1 key={p.id}>{p.title}</h1>
                 <p>{p.body}</p>
-                <PostDeals id={p.id} />
+                <PostDeals id={p.id} prevTitle={p.title} prevBody={p.body}/>
                 <ReactionsBar postId={p.id}/>
                 <Coments postId={p.id} />
             </div>

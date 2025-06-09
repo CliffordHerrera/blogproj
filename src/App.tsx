@@ -1,9 +1,9 @@
 import {Routes, Route} from 'react-router-dom'
 import './App.css'
-import PostsPage from "./components/posts/PostsPage"
-import PostDetail from "./components/posts/PostDetail"
+import PostsPage from "./Pages/PostsPage"
+import PostDetail from "./Pages/PostDetail"
 import Header from './components/UI/Header'
-
+import { postDetailPath } from './constants'
 
 export default function App() {
 
@@ -12,7 +12,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<PostsPage />} />
-        <Route path="/posts/:postId" element={<PostDetail />} />
+        <Route path={postDetailPath} element={<PostDetail />} />
       </Routes>
 
     </div>
