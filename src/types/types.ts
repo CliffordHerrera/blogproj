@@ -4,12 +4,14 @@ export type Posts = {
     userId: number,
     id: number,
     title: string,
+    shortDef: string,
     body: string
 };
 
 export type Comments = {
     postId: number,
     id: number,
+    date: string,
     name: string,
     email: string,
     body: string

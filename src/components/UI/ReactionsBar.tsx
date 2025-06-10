@@ -31,22 +31,22 @@ export default function ReactionsBar({ postId }: { postId: number }) {
             <button onClick={() => handleReaction('Like')} className={`${isLike ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
                 {Reactions.Like}
             </button>
-            <span className='m-1 bg-slate-400 w-5 rounded-full'>{Like}</span>
+            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{Like}</span>
 
             <button onClick={() => handleReaction('LOL')} className={`${isLOL ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
                 {Reactions.LOL}
             </button>
-            <span className='m-1 bg-slate-400 w-5 rounded-full'>{LOL}</span>
+            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{LOL}</span>
 
             <button onClick={() => handleReaction('Dislike')} className={`${isDislike ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
                 {Reactions.Dislike}
             </button>
-            <span className='m-1 bg-slate-400 w-5 rounded-full'>{Dislike}</span>
+            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{Dislike}</span>
 
             <button onClick={() => handleReaction('FuckinShit')} className={`${isFuckinShit ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
                 {Reactions.FuckinShit}
             </button>
-            <span className='m-1 bg-slate-400 w-5 rounded-full'>{FuckinShit}</span>
+            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{FuckinShit}</span>
         </div>
     );
 }

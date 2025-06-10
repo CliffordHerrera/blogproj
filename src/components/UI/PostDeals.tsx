@@ -1,10 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateBody, deletePost } from '../../redux/slices/postSlice';
-import type { State, Comments } from '../../types/types';
 import Modal from '../Modal';
-import CommentIcon from '@mui/icons-material/Comment';
-import LikeIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
@@ -17,7 +14,6 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
     const [title, setTitle] = useState<string>(prevTitle);
     const [body, setBody] = useState<string>(prevBody);
     const inputRef = useRef<HTMLInputElement>(null);
-    const comments = useSelector((state: State) => state.comments.commentData);
 
 
     const notifyEdit = () => toast("Пост успешно изменен!");
@@ -46,16 +42,11 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
 
 
     return (
-        <div className="flex flex-row justify-evenly mt-2">
-            <div>
-                <CommentIcon />
-                {comments.filter((comment: Comments) => comment.postId === id).length}
-            </div>
-            <div>
-                <LikeIcon />
-            </div>
+        <div className="flex flex-row justify-between">
+
             <div
                 onClick={() => setShowEdit(true)}
+                className='mx-11 hover:bg-slate-400 transition duration-300 rounded'
             >
                 <EditIcon />
             </div>
@@ -101,7 +92,8 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
                     </div>
                 </Modal>
             )}
-            <div onClick={() => setShowDel(true)}>
+            <div onClick={() => setShowDel(true)}
+                className='mx-1 hover:bg-slate-400 transition duration-300 rounded'>
                 <DeleteIcon />
             </div>
             {showDel && (
@@ -127,17 +119,3 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
         </div>
     );
 }
-
-
-
-/**
- * function App(){
-    const notify = () => toast("This is a toast notification !");
-    return (
-    <div>
-        <button onClick={notify}>Notify !</button>
-        <ToastContainer />
-      </div>
-    )
-}
- */

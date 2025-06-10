@@ -2,18 +2,23 @@ import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addPost, setShowModal } from '../../redux/slices/postSlice';
 import type { State } from '../../types/types';
+import { toast } from 'react-toastify';
 
 export default function AddPost() {
     const posts = useSelector((state: State) => state.posts.postData);
     const dispatch = useDispatch();
     const [title, setTitle] = useState<string>('');
+    const [shortDef, setShortDef] = useState<string>('');
     const [body, setBody] = useState<string>('');
     const [error, setError] = useState<{ title?: string; body?: string }>({});
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const notifyAdd = () => toast("Пост успешно добавлен!");
     const validate = () => {
         const newError: typeof error = {};
 
         if (!title.trim()) newError.title = 'Title is required';
+        if (!shortDef.trim()) newError.body = 'Short definition is required';
         if (!body.trim()) newError.body = 'Text is required';
 
         setError(newError);
@@ -23,11 +28,13 @@ export default function AddPost() {
 
     const postAdd = () => {
         if (!validate()) return;
-        dispatch(addPost({ userId: 1, id: posts.length + 1, title: title, body: body }));
+        dispatch(addPost({ userId: 1, id: posts.length + 1, title: title, shortDef: shortDef, body: body }));
         dispatch(setShowModal(false));
 
         setBody('');
+        setShortDef('');
         setTitle('');
+        notifyAdd();
     };
 
     useEffect(() => {
@@ -38,9 +45,9 @@ export default function AddPost() {
 
     return (
         <div className="flex flex-col justify-between mt-2">
-            <h1>Add Some Post</h1>
+            <h1>Создать пост</h1>
             <button onClick={() => dispatch(setShowModal(false))} className="absolute top-2 right-2 hover:scale-125">❌</button>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">Заголовок</label>
             <input
                 type="text"
                 name='title'
@@ -51,17 +58,37 @@ export default function AddPost() {
                 required
             />
             {error.title && <p className='text-red-500'>{error.title}</p>}
-            <label htmlFor="body">Text</label>
-            <textarea name="body" id="body" cols={30} rows={10} value={body} onChange={(e) => setBody(e.target.value)}
-                className='border black rounded m-2 p-2' required>
-                Enter some text
+            <label htmlFor="shortDef">Краткое описание</label>
+            <textarea
+                name="shortDef"
+                id="shortDef"
+                cols={50}
+                rows={5}
+                value={shortDef}
+                onChange={(e) => setShortDef(e.target.value)}
+                className='border black rounded m-2 p-2'
+                required>
+                Введите краткое описание
+            </textarea>
+            {error.body && <p className='text-red-500'>{error.body}</p>}
+            <label htmlFor="body">Содержание</label>
+            <textarea
+                name="body"
+                id="body"
+                cols={30}
+                rows={10}
+                value={body}
+                onChange={(e) => setBody(e.target.value)}
+                className='border black rounded m-2 p-2' 
+                required>
+                Введите содержание своего поста
             </textarea>
             {error.body && <p className='text-red-500'>{error.body}</p>}
             <button
                 onClick={postAdd}
                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
             >
-                Add Post
+                Опубликовать
             </button>
         </div>
     );

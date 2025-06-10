@@ -2,13 +2,15 @@ import { useDispatch } from "react-redux";
 import { useState, useRef, useEffect } from "react";
 import Modal from "../Modal";
 import { deleteComment, updateBodyCum } from "../../redux/slices/commentSlice";
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
-export default function CommentDeals({ commentId }: { commentId: number }) {
+export default function CommentDeals({ commentId, commentName, commentBody }: { commentId: number, commentName: string, commentBody: string }) {
     const dispatch = useDispatch();
     const [showDel, setShowDel] = useState<boolean>(false);
     const [showEdit, setShowEdit] = useState<boolean>(false);
-    const [name, setName] = useState<string>('');
-    const [body, setBody] = useState<string>('');
+    const [name, setName] = useState<string>(commentName);
+    const [body, setBody] = useState<string>(commentBody);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const cumEdit = () => {
@@ -32,13 +34,13 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
     }, [showEdit]);
 
     return (
-        <div>
-            <button
+        <div className="flex flex-row">
+            <div
                 onClick={() => setShowEdit(true)}
-                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
+                className="hover:bg-slate-400 transition duration-300 rounded"
             >
-                Edit Comment
-            </button>
+                <EditIcon />
+            </div>
 
             {showEdit && (
                 <Modal>
@@ -51,7 +53,7 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
                             value={name}
                             ref={inputRef}
                             onChange={(e) => setName(e.target.value)}
-                            className="border black rounded m-2"
+                            className="border black rounded m-2 p-2"
                         />
                         <label htmlFor="body">Text</label>
                         <textarea
@@ -61,7 +63,7 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
                             rows={10}
                             value={body}
                             onChange={(e) => setBody(e.target.value)}
-                            className="border black rounded m-2">
+                            className="border black rounded m-2 p-2">
 
                         </textarea>
                         <div className="flex flex-row justify-between">
@@ -69,21 +71,21 @@ export default function CommentDeals({ commentId }: { commentId: number }) {
                                 onClick={() => setShowEdit(false)}
                                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300"
                             >
-                                Cancel
+                                Отмена
                             </button>
                             <button
                                 onClick={cumEdit}
                                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300"
                             >
-                                Save
+                                Сохранить
                             </button>
                         </div>
                     </div>
                 </Modal>
             )}
-            <button onClick={() => setShowDel(true)} className='bg-red-700 border rounded hover:bg-red-200 transition duration-300'>
-                Delete Comment
-            </button>
+            <div onClick={() => setShowDel(true)} className='hover:bg-red-400 transition duration-300 rounded'>
+                <DeleteIcon />
+            </div>
             {showDel && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
