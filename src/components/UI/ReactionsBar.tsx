@@ -3,6 +3,13 @@ import type { State } from '../../types/types';
 import { Reactions } from '../../types/reactions';
 import { setReaction } from '../../redux/slices/reactionSlice';
 
+type ReactionMap = {
+    type: 'Like' | 'LOL' | 'Dislike' | 'FuckinShit';
+    emoji: string;
+    count: number;
+    isReacted: boolean;
+}
+
 
 export default function ReactionsBar({ postId }: { postId: number }) {
     const dispatch = useDispatch();
@@ -11,7 +18,7 @@ export default function ReactionsBar({ postId }: { postId: number }) {
         state.reactions[postId]
     );
 
-        const {
+    const {
         Like = 0,
         LOL = 0,
         Dislike = 0,
@@ -22,31 +29,48 @@ export default function ReactionsBar({ postId }: { postId: number }) {
         isFuckinShit = false,
     } = reactionData || {};
 
+    const reactionsMap: ReactionMap[] = [
+        {
+            type: 'Like',
+            emoji: Reactions.Like,
+            count: Like,
+            isReacted: isLike,
+        },
+        {
+            type: 'LOL',
+            emoji: Reactions.LOL,
+            count: LOL,
+            isReacted: isLOL,
+        },
+        {
+            type: 'Dislike',
+            emoji: Reactions.Dislike,
+            count: Dislike,
+            isReacted: isDislike,
+        },
+        {
+            type: 'FuckinShit',
+            emoji: Reactions.FuckinShit,
+            count: FuckinShit,
+            isReacted: isFuckinShit,
+        },
+    ];
+
     const handleReaction = (type: 'Like' | 'LOL' | 'Dislike' | 'FuckinShit') => {
         dispatch(setReaction({ postId, reactionType: type }));
     }
 
     return (
         <div className="flex flex-row items-center justify-center rounded-xl">
-            <button onClick={() => handleReaction('Like')} className={`${isLike ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
-                {Reactions.Like}
-            </button>
-            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{Like}</span>
-
-            <button onClick={() => handleReaction('LOL')} className={`${isLOL ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
-                {Reactions.LOL}
-            </button>
-            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{LOL}</span>
-
-            <button onClick={() => handleReaction('Dislike')} className={`${isDislike ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
-                {Reactions.Dislike}
-            </button>
-            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{Dislike}</span>
-
-            <button onClick={() => handleReaction('FuckinShit')} className={`${isFuckinShit ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
-                {Reactions.FuckinShit}
-            </button>
-            <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{FuckinShit}</span>
+            {reactionsMap.map(({ type, emoji, count, isReacted }: ReactionMap) => (
+                <div key={type} className="flex flex-row items-center justify-center rounded-xl">
+                    <button onClick={() => handleReaction(type)} className={`${isReacted ? 'bg-purple-500' : 'bg-blue-500'} hover:bg-blue-300 rounded-full m-1`}>
+                        {emoji}
+                    </button>
+                    <span className='flex items-center justify-center m-1 bg-slate-400 w-5 rounded-full'>{count}</span>
+                </div>
+            ))}
         </div>
+
     );
 }

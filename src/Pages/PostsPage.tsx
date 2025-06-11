@@ -13,7 +13,7 @@ export default function PostsPage() {
     const showModal = useSelector((state: State) => state.posts.showModal);
     const status = 'succeeded';
 
-    
+
 
     return (
         <div className="grid grid-cols-[2fr_10fr] gap-4 p-4">

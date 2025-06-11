@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateBody, deletePost } from '../../redux/slices/postSlice';
+import { eraseComments } from '../../redux/slices/commentSlice';
 import Modal from '../Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -21,6 +22,7 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
 
     const postDelete = () => {
         dispatch(deletePost(id));
+        dispatch(eraseComments(id));
         notifyDelete();
     };
 

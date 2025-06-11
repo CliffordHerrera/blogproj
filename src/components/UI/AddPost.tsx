@@ -1,11 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addPost, setShowModal } from '../../redux/slices/postSlice';
-import type { State } from '../../types/types';
 import { toast } from 'react-toastify';
 
 export default function AddPost() {
-    const posts = useSelector((state: State) => state.posts.postData);
     const dispatch = useDispatch();
     const [title, setTitle] = useState<string>('');
     const [shortDef, setShortDef] = useState<string>('');
@@ -28,7 +26,7 @@ export default function AddPost() {
 
     const postAdd = () => {
         if (!validate()) return;
-        dispatch(addPost({ userId: 1, id: posts.length + 1, title: title, shortDef: shortDef, body: body }));
+        dispatch(addPost({ userId: 1, id: Date.now(), title: title, shortDef: shortDef, body: body }));
         dispatch(setShowModal(false));
 
         setBody('');

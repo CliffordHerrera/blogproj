@@ -46,7 +46,7 @@ export default function Coments({ postId }: { postId: number }) {
     return (
         <div className="flex flex-col items-center justify-center bg-slate-100 border-black rounded m-2">
             <h1 className="text-2xl text-black font-bold">Комментарии ({length})</h1>
-            <div className="flex flex-col items-start mt-2">
+            <div className="flex flex-col items-start mt-2 m-5">
                 <h1 className="text-xl p-4">Добавить комментарий</h1>
                 <label htmlFor="title">Имя</label>
                 <input

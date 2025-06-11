@@ -23,6 +23,10 @@ const commentSlice = createSlice({
             state.commentData = state.commentData.filter((p) => p.id !== action.payload);
             localStorage.setItem("comments", JSON.stringify(state.commentData));
         },
+        eraseComments: (state, action: PayloadAction<number>) => {
+            const PostIdToDel = action.payload;
+            state.commentData = state.commentData.filter((p) => p.postId !== PostIdToDel);
+        },
         addComment: (state, action: PayloadAction<Comments>) => {
             state.commentData.push(action.payload);
             localStorage.setItem("comments", JSON.stringify(state.commentData));
@@ -43,18 +47,7 @@ const commentSlice = createSlice({
 
 
 
-export const {  deleteComment, addComment, updateBodyCum, setShowModal } = commentSlice.actions
+export const {  deleteComment, addComment, updateBodyCum, setShowModal, eraseComments } = commentSlice.actions
 export default commentSlice.reducer;
 
-/**
- * export const fetchPosts = createAsyncThunk<Posts[]>("posts/fetchPosts", async () => {
-    const responce = await fetch("https://jsonplaceholder.typicode.com/posts?limit=10");
-    const data = await responce.json();
-    return data;
-});
- * export const fetchComments = createAsyncThunk<Comments[]>("posts/fetchComments", async () => {
-    const responce = await fetch("https://jsonplaceholder.typicode.com/comments");
-    const data = await responce.json();
-    return data;
-});
- */
+//
