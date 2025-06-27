@@ -66,7 +66,7 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
                             onChange={(e) => setTitle(e.target.value)}
                             className="border black rounded m-2 p-2"
                         />
-                        <label htmlFor="body">Text</label>
+                        <label htmlFor="body">Содержание</label>
                         <textarea
                             name="body"
                             id="body"
@@ -95,7 +95,7 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
                 </Modal>
             )}
             <div onClick={() => setShowDel(true)}
-                className='mx-1 hover:bg-slate-400 transition duration-300 rounded'>
+                className='mx-1 hover:bg-red-400 transition duration-300 rounded'>
                 <DeleteIcon />
             </div>
             {showDel && (

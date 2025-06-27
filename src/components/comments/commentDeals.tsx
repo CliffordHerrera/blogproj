@@ -34,7 +34,7 @@ export default function CommentDeals({ commentId, commentName, commentBody }: { 
     }, [showEdit]);
 
     return (
-        <div className="flex flex-row">
+        <div className="flex flex-row px-3">
             <div
                 onClick={() => setShowEdit(true)}
                 className="hover:bg-slate-400 transition duration-300 rounded"
@@ -83,24 +83,24 @@ export default function CommentDeals({ commentId, commentName, commentBody }: { 
                     </div>
                 </Modal>
             )}
-            <div onClick={() => setShowDel(true)} className='hover:bg-red-400 transition duration-300 rounded'>
+            <div onClick={() => setShowDel(true)} className='hover:bg-red-400 transition duration-300 rounded mx-2'>
                 <DeleteIcon />
             </div>
             {showDel && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
-                        <h1>Are you sure you wanna delete this comment?</h1>
+                        <h1>Вы действительно хотите удалить этот комментарий?</h1>
                         <button
                             onClick={() => setShowDel(false)}
                             className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"
                         >
-                            Cancel
+                            Отмена
                         </button>
                         <button
                             onClick={cumDelete}
                             className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"
                         >
-                            Delete
+                            Удалить
                         </button>
                     </div>
                 </Modal>

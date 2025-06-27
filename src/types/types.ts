@@ -13,7 +13,6 @@ export type Comments = {
     id: number,
     date: string,
     name: string,
-    email: string,
     body: string
 };
 
