@@ -56,7 +56,10 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
             {showEdit && (
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
-                        <h1>Редактирование поста</h1>
+                        <div className="flex flex-row items-center justify-center w-full">
+                            <h1 className="mx-10 my-1 mb-7 font-bold text-xl">Редактирование поста</h1>
+                        </div>
+                        <div className="h-0.5 bg-black w-full my-2"></div>
                         <label htmlFor="title">Заголовок</label>
                         <input
                             type="text"
@@ -80,13 +83,13 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
                         <div className="flex flex-row justify-between">
                             <button
                                 onClick={() => setShowEdit(false)}
-                                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300"
+                                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-3 px-2"
                             >
                                 Отмена
                             </button>
                             <button
                                 onClick={postEdit}
-                                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300"
+                                className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-3 px-2"
                             >
                                 Сохранить
                             </button>
@@ -102,12 +105,7 @@ export default function PostDeals({ id, prevTitle, prevBody }: { id: number, pre
                 <Modal>
                     <div className="flex flex-col justify-between mt-2">
                         <h1>Вы уверены что хотите удалить этот пост?</h1>
-                        <button
-                            onClick={() => setShowDel(false)}
-                            className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"
-                        >
-                            Отмена
-                        </button>
+                        <button onClick={() => setShowDel(false)} className="absolute top-2 right-2 hover:scale-125">❌</button>
                         <button
                             onClick={postDelete}
                             className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 m-2"

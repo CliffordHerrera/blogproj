@@ -85,7 +85,7 @@ export default function Coments({ postId }: { postId: number }) {
             {comments.map((comment: Comments) => (
                 comment.postId === postId &&
                 <div key={comment.id} className="flex flex-col items-start bg-slate-300 border m-2 p-2 rounded w-full">
-                    <div className="flex flex-row items-start justify-between">
+                    <div className="flex flex-row items-start justify-between w-full">
                         <div className="flex flex-row">
                             <Person2Icon />
                             <h3 className="text-lg text-orange-500 font-semibold px-2">{comment.name}</h3>
@@ -97,7 +97,7 @@ export default function Coments({ postId }: { postId: number }) {
                         </div>
 
                     </div>
-                    <p className="p-2">{comment.body}</p>
+                    <p className="p-2 text-left indent-8">{comment.body}</p>
                 </div>
             ))}
         </div>

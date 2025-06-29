@@ -23,13 +23,13 @@ export default function PostDetail() {
             </div>
             <div className='bg-slate-200 w-full h-screen mt-5 rounded p-4'>
                 {posts.map((p) => p.id === Number(postId) &&
-                    <div key={p.id}>
-                        <div className='flex flex-row justify-between'>
+                    <div key={p.id} className='flex flex-col items-start justify-between'>
+                        <div className='flex flex-row justify-between w-full'>
                             <h1 className='text-2xl font-bold px-2'>{p.title}</h1>
                             <PostDeals id={p.id} prevTitle={p.title} prevBody={p.body} />
                         </div>
-                        <p className='p-4 m-10'>{p.body}</p>
-                        <div className='p-4 m-5'>
+                        <p className='p-4 m-10 text-left indent-8'>{p.body}</p>
+                        <div className='p-4 m-5 flex flex-col items-start w-full'>
                             <h1 className='text-xl font-semibold m-4'>Реакции</h1>
                             <ReactionsBar postId={p.id} />
                         </div>
