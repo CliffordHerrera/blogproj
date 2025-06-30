@@ -6,6 +6,7 @@ import ReactionsBar from '../components/UI/ReactionsBar';
 import Coments from '../components/comments/comments';
 import Modal from '../components/Modal';
 import AddPost from '../components/UI/AddPost';
+import { ToastContainer } from 'react-toastify';
 
 export default function PostDetail() {
     const { postId } = useParams<{ postId: string }>();
@@ -14,7 +15,8 @@ export default function PostDetail() {
     const showModal = useSelector((state: State) => state.posts.showModal);
 
     return (
-        <div className='w-full h-screen mt-10 rounded p-4'>
+        <div className='w-7xl h-screen mt-10 rounded p-4'>
+            <ToastContainer />
             {showModal && <Modal><AddPost /></Modal>}
             <div
                 onClick={() => navigate(-1)}

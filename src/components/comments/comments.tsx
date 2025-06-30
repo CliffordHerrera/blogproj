@@ -40,7 +40,7 @@ export default function Coments({ postId }: { postId: number }) {
     }, []);
 
     return (
-        <div className="flex flex-col items-start justify-center bg-slate-100 rounded m-2">
+        <div className="flex flex-col items-start justify-center bg-slate-100 rounded m-2 w-full">
             <h1 className="text-2xl text-black font-bold ml-10">Комментарии ({length})</h1>
             <div className="flex flex-col items-start mt-2 m-5">
                 <h1 className="text-xl p-4">Добавить комментарий</h1>
@@ -84,7 +84,7 @@ export default function Coments({ postId }: { postId: number }) {
 
             {comments.map((comment: Comments) => (
                 comment.postId === postId &&
-                <div key={comment.id} className="flex flex-col items-start bg-slate-300 border m-2 p-2 rounded w-full">
+                <div key={comment.id} className="flex flex-col items-start bg-slate-300 border m-2 p-2 rounded w-6xl">
                     <div className="flex flex-row items-start justify-between w-full">
                         <div className="flex flex-row">
                             <Person2Icon />

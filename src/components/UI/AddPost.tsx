@@ -8,16 +8,16 @@ export default function AddPost() {
     const [title, setTitle] = useState<string>('');
     const [shortDef, setShortDef] = useState<string>('');
     const [body, setBody] = useState<string>('');
-    const [error, setError] = useState<{ title?: string; body?: string }>({});
+    const [error, setError] = useState<{ title?: string; shortDef?: string; body?: string }>({});
     const inputRef = useRef<HTMLInputElement>(null);
 
     const notifyAdd = () => toast("Пост успешно добавлен!");
     const validate = () => {
         const newError: typeof error = {};
 
-        if (!title.trim()) newError.title = 'Title is required';
-        if (!shortDef.trim()) newError.body = 'Short definition is required';
-        if (!body.trim()) newError.body = 'Text is required';
+        if (!title.trim()) newError.title = 'Название обязательно!';
+        if (!shortDef.trim()) newError.shortDef = 'Краткое описание обязательно!';
+        if (!body.trim()) newError.body = 'Содержание обязательно!';
 
         setError(newError);
         return Object.keys(newError).length === 0;
@@ -68,7 +68,7 @@ export default function AddPost() {
                 required>
                 Введите краткое описание
             </textarea>
-            {error.body && <p className='text-red-500'>{error.body}</p>}
+            {error.shortDef && <p className='text-red-500'>{error.shortDef}</p>}
             <label htmlFor="body">Содержание</label>
             <textarea
                 name="body"
@@ -81,7 +81,7 @@ export default function AddPost() {
                 required>
                 Введите содержание своего поста
             </textarea>
-            {error.body && <p className='text-red-500'>{error.body}</p>}
+            {error.body && <p className='text-red-500 pb-2'>{error.body}</p>}
             <button
                 onClick={postAdd}
                 className="bg-yellow-500 rounded hover:bg-green-200 transition duration-300 mr-2"
